@@ -60,6 +60,9 @@
             android:name=".camera.CameraActivity"
             android:exported="false" />
         <activity
+            android:name=".socialshare.SocialShareDemoActivity"
+            android:exported="false" />
+        <activity
             android:name="in.geofriend.androidutils.MainActivity"
             android:exported="true">
             <intent-filter>

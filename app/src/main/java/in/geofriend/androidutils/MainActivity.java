@@ -17,6 +17,7 @@ import in.geofriend.androidutils.fileutility.FileUtilityActivity;
 import in.geofriend.androidutils.imageutils.ImageUtilsDemoActivity;
 import in.geofriend.androidutils.location.LocationActivity;
 import in.geofriend.androidutils.smsutils.SMSDemoActivity;
+import in.geofriend.androidutils.socialshare.SocialShareDemoActivity;
 import in.geofriend.camerahelper.CameraHelper;
 import in.geofriend.locationhelper.LocationHelper;
 
@@ -31,12 +32,7 @@ public class MainActivity extends AppCompatActivity {
             TextView textView = layout.findViewById(R.id.demo_name);
             textView.setText(item);
             listContainer.addView(layout);
-            layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClicked(item);
-                }
-            });
+            layout.setOnClickListener(v -> onItemClicked(item));
         }
     }
 
@@ -57,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case Constants.IMAGE_PICKER:
                 intent = new Intent(this, ImageUtilsDemoActivity.class);
+                break;
+            case Constants.SOCIAL_SHARE:
+                intent = new Intent(this, SocialShareDemoActivity.class);
                 break;
             case Constants.BARCODE_SCANNER:
                 intent = new Intent(this, CodeScannerActivity.class);
