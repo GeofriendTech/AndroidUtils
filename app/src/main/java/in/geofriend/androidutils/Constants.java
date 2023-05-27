@@ -16,7 +16,7 @@ public class Constants {
             SMS_UTILS,
             IMAGE_PICKER,
             BARCODE_SCANNER,
-            SOCIAL_SHARE
-
+            SOCIAL_SHARE,
+            LOGCAT_LOGS
     };
 }
