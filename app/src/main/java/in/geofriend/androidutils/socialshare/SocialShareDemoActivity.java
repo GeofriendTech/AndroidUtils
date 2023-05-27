@@ -2,10 +2,8 @@ package in.geofriend.androidutils.socialshare;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.File;
-
 import in.geofriend.androidutils.R;
+import in.geofriend.socialshare.DataType;
 import in.geofriend.socialshare.SocialShare;
 
 public class SocialShareDemoActivity extends AppCompatActivity {
@@ -16,7 +14,8 @@ public class SocialShareDemoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_share);
         final SocialShare socialShare = new SocialShare(this);
-        File file = new File("sample text");
-        findViewById(R.id.btn_social_share).setOnClickListener(v -> socialShare.launchSocialShareDialog(file,null,null));
+        findViewById(R.id.btn_social_share).
+                setOnClickListener(v ->
+                        socialShare.launchSocialShareDialog("sample text", DataType.TEXT));
     }
 }

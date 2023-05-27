@@ -2,14 +2,11 @@ package in.geofriend.socialshare;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-
-import java.io.File;
-import java.net.URLConnection;
+import android.text.Html;
 
 public class SocialShare {
 
-    private Context context;
+    private final Context context;
 
     public SocialShare(Context context) {
         this.context = context;
@@ -17,25 +14,18 @@ public class SocialShare {
 
     /**
      *
-     * @param file file tp be shared
-     * @param subject sharing file subject
-     * @param fileDescription sharing file description
+     * @param data text or html data to be shared
+     * @param dataType type of data to be shared
      */
-    public void launchSocialShareDialog(File file, String subject, String fileDescription) {
+    public void launchSocialShareDialog(String data, DataType dataType) {
         Intent intentShareFile = new Intent(Intent.ACTION_SEND);
 
-        intentShareFile.setType(URLConnection.guessContentTypeFromName(file.getName()));
-        intentShareFile.putExtra(Intent.EXTRA_STREAM,
-                Uri.parse("file://"+file.getAbsolutePath()));
-
-        if(subject != null && !subject.isEmpty()) {
-            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if(DataType.HTML == dataType) {
+            intentShareFile.setType("text/html");
+        } else if (DataType.TEXT == dataType) {
+            intentShareFile.setType("text/plain");
         }
-
-        if(fileDescription != null && !fileDescription.isEmpty()) {
-            intentShareFile.putExtra(Intent.EXTRA_TEXT, fileDescription);
-        }
-
+        intentShareFile.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(data));
         context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
 
     }
