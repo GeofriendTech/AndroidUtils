@@ -22,10 +22,11 @@ public class SocialShare {
 
         if(DataType.HTML == dataType) {
             intentShareFile.setType("text/html");
+            intentShareFile.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(data));
         } else if (DataType.TEXT == dataType) {
             intentShareFile.setType("text/plain");
+            intentShareFile.putExtra(android.content.Intent.EXTRA_TEXT, data);
         }
-        intentShareFile.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(data));
         context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
 
     }
