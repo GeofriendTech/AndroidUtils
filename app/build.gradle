@@ -38,6 +38,7 @@ dependencies {
     implementation project(path: ':permissions')
     implementation project(path: ':smsutils')
     implementation project(path: ':imageutils')
+    implementation project(path: ':logutils')
     implementation project(path: ':barcodescanner')
     implementation project(path: ':socialshare')
     testImplementation 'junit:junit:4.13.2'

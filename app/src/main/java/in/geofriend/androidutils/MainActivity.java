@@ -20,11 +20,14 @@ import in.geofriend.androidutils.smsutils.SMSDemoActivity;
 import in.geofriend.androidutils.socialshare.SocialShareDemoActivity;
 import in.geofriend.camerahelper.CameraHelper;
 import in.geofriend.locationhelper.LocationHelper;
+import in.geofriend.logutils.LogsActivity;
+import in.geofriend.logutils.LogsCapture;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogsCapture.start(this);
         setContentView(R.layout.activity_main);
         LinearLayoutCompat listContainer = findViewById(R.id.listContainer);
         for(String item : Constants.DEMOS) {
@@ -56,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case Constants.SOCIAL_SHARE:
                 intent = new Intent(this, SocialShareDemoActivity.class);
+                  break;
+            case Constants.LOGCAT_LOGS:
+                intent = new Intent(this, LogsActivity.class);
                 break;
             case Constants.BARCODE_SCANNER:
                 intent = new Intent(this, CodeScannerActivity.class);
