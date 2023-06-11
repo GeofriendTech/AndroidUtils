@@ -3,54 +3,20 @@ plugins {
     id 'maven-publish'
 }
 
-def githubProperties = new Properties()
-//githubProperties.load(new FileInputStream(rootProject.file("github.properties"))) //Set env variable GPR_USER & GPR_API_KEY if not adding a properties file
-
-def getVersionName = { ->
-    return "1.0.0" // Replace with version Name
-}
-
-def getArtificatId = { ->
-    return "camerahelper" // Replace with library name ID
-}
-
-publishing {
-    publications {
-        bar(MavenPublication) {
-            groupId 'in.geofriend' // Replace with group ID
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-        }
-    }
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             ** Replace GITHUB_USERID with your/organisation Github userID
-             ** and REPOSITORY with the repository name on GitHub
-             */
-            url = uri("https://maven.pkg.github.com/geofriendtech/REPOSITORY")
-            credentials {
-                /** Create github.properties in root project folder file with
-                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
-                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
-
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}
-
+group = 'com.github.geofriendtech'
 
 android {
-    compileSdk 32
+    compileSdk 33
 
+    testFixtures {
+        enable = true
+    }
     defaultConfig {
         minSdk 21
-        targetSdk 32
-
+        targetSdk 33
+        aarMetadata {
+            minCompileSdk = 21
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -61,16 +27,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    namespace 'in.geofriend.camerahelper'
+}
+
+def bundleReleaseTaskName = tasks.findByName('bundleRelease')?.name ?: 'bundleRelease'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.github.geofriendtech'
+            artifactId = 'camerahelper'
+            version = '1.0'
+
+            from components.findByName('release')
+        }
+    }
+    repositories {
+        maven {
+            name = 'geofriend'
+            url = "${project.buildDir}/repo"
+        }
+    }
+}
+
+afterEvaluate {
+    publishing.publications.maven.artifact(bundleReleaseTaskName) {
+        builtBy(bundleReleaseTaskName)
+    }
 }
 
 dependencies {
-
-    implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
