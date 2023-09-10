@@ -1,17 +1,16 @@
 plugins {
     id 'com.android.library'
 }
-group = 'com.github.geofriendtech'
 
 def libraryOutputName(String variantName) {
-    "imageutils-1.0-${variantName}.aar"
+    "appdatamanager-1.0-${variantName}.aar"
 }
 
 /*publishing {
     publications {
         release(MavenPublication) {
             groupId = 'io.github.geofriendtech'
-            artifactId = 'imageutils'
+            artifactId = 'appdatamanager'
             version = '1.0'
 //            from components.release
         }
@@ -25,19 +24,16 @@ def libraryOutputName(String variantName) {
     }
 }*/
 
-
 android {
+    namespace 'io.github.geofriendtech.appdatamanager'
     compileSdk 33
 
     defaultConfig {
         minSdk 21
         targetSdk 33
-        aarMetadata {
-            minCompileSdk = 21
-        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
     }
 
     buildTypes {
@@ -46,6 +42,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (outputFileName.endsWith('.aar')) {
+                outputFileName = libraryOutputName(variant.name)
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -56,7 +61,6 @@ android {
             withSourcesJar()
         }
     }
-    namespace 'io.github.geofriendtech.imageutils'
 }
 
 dependencies {
