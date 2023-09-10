@@ -18,6 +18,7 @@ import in.geofriend.androidutils.fileutility.FileUtilityActivity;
 import in.geofriend.androidutils.imageutils.ImageUtilsDemoActivity;
 import in.geofriend.androidutils.location.LocationActivity;
 import in.geofriend.androidutils.smsutils.SMSDemoActivity;
+import in.geofriend.androidutils.socialshare.SocialShareDemoActivity;
 import in.geofriend.camerahelper.CameraHelper;
 import in.geofriend.locationhelper.LocationHelper;
 import in.geofriend.logutils.LogsActivity;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
             case Constants.IMAGE_PICKER:
                 intent = new Intent(this, ImageUtilsDemoActivity.class);
                 break;
+            case Constants.SOCIAL_SHARE:
+                intent = new Intent(this, SocialShareDemoActivity.class);
+                  break;
             case Constants.LOGCAT_LOGS:
                 intent = new Intent(this, LogsActivity.class);
                 break;

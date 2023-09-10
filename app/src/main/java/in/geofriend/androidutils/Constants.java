@@ -8,6 +8,7 @@ public class Constants {
     public static final String LOGCAT_LOGS = "Show Logcat Logs";
     public static final String BARCODE_SCANNER = "Barcode Scanner";
     public static final String APP_DATA_MANAGER = "App Data Manager";
+    public static final String SOCIAL_SHARE = "Social Share";
     public static final String [] DEMOS = {
             FILE_UTILITY,
             CAMERA_HELPER,
@@ -17,5 +18,8 @@ public class Constants {
             LOGCAT_LOGS,
             BARCODE_SCANNER,
             APP_DATA_MANAGER
+            BARCODE_SCANNER,
+            SOCIAL_SHARE,
+            LOGCAT_LOGS
     };
 }
