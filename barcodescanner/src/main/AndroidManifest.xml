@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <application>
         <activity
-            android:name=".v2.BarcodeScannerActivity"
+            android:name="in.geofriend.barcodescanner.v2.BarcodeScannerActivity"
             android:exported="false" />
 
         <meta-data

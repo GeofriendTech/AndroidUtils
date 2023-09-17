@@ -17,7 +17,7 @@ public class Constants {
             IMAGE_PICKER,
             LOGCAT_LOGS,
             BARCODE_SCANNER,
-            APP_DATA_MANAGER
+            APP_DATA_MANAGER,
             BARCODE_SCANNER,
             SOCIAL_SHARE,
             LOGCAT_LOGS
